@@ -1,14 +1,5 @@
 package com.kristijangeorgiev.resource.util;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-
 import org.springframework.boot.autoconfigure.security.oauth2.resource.JwtAccessTokenConverterConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,6 +12,15 @@ import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 
@@ -39,6 +39,7 @@ public class CustomAccessTokenConverter implements AccessTokenConverter, JwtAcce
 		converter.setAccessTokenConverter(this);
 	}
 
+	@Override
 	public OAuth2AccessToken extractAccessToken(String value, Map<String, ?> map) {
 		DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(value);
 		Map<String, Object> info = new HashMap<String, Object>(map);
@@ -88,6 +89,7 @@ public class CustomAccessTokenConverter implements AccessTokenConverter, JwtAcce
 		return new OAuth2Authentication(request, user);
 	}
 
+	@Override
 	public Map<String, ?> convertAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
 		Map<String, Object> response = new HashMap<String, Object>();
 		OAuth2Request clientToken = authentication.getOAuth2Request();
